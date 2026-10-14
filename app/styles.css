@@ -1,0 +1,414 @@
+:root {
+  color-scheme: light;
+  --ink-950: #172033;
+  --ink-800: #34405a;
+  --ink-600: #63708a;
+  --ink-400: #8c98ad;
+  --surface: #ffffff;
+  --surface-soft: #f5f7fb;
+  --surface-tint: #eef3ff;
+  --line: #dfe5ef;
+  --line-strong: #cbd5e4;
+  --brand-700: #314bb7;
+  --brand-600: #4161d1;
+  --brand-100: #e8edff;
+  --success-800: #176044;
+  --success-100: #dcf6e9;
+  --warning-800: #8a5600;
+  --warning-100: #fff0c7;
+  --danger-800: #a22f3d;
+  --danger-100: #ffe2e4;
+  --neutral-800: #4a5870;
+  --neutral-100: #e9edf4;
+  --shadow-sm: 0 2px 8px rgba(25, 42, 78, 0.06);
+  --shadow-md: 0 12px 30px rgba(25, 42, 78, 0.09);
+  --radius-sm: 0.5rem;
+  --radius-md: 0.85rem;
+  --radius-lg: 1.25rem;
+  --content-width: 75rem;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 18rem;
+  background: var(--surface-soft);
+}
+
+body {
+  min-width: 18rem;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink-950);
+  background:
+    radial-gradient(circle at 85% -10%, rgba(65, 97, 209, 0.12), transparent 28rem),
+    var(--surface-soft);
+  line-height: 1.5;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+a {
+  color: var(--brand-700);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--brand-600);
+}
+
+:focus-visible {
+  outline: 3px solid #f2a900;
+  outline-offset: 3px;
+}
+
+.dashboard {
+  width: min(100% - 2rem, var(--content-width));
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4.5rem) 0 4rem;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
+.dashboard-header h1,
+.dashboard-title {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--ink-950);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.dashboard-header p,
+.dashboard-subtitle {
+  max-width: 42rem;
+  margin: 0.9rem 0 0;
+  color: var(--ink-600);
+  font-size: clamp(1rem, 1.7vw, 1.15rem);
+}
+
+.dashboard-meta,
+.dashboard-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+  color: var(--ink-600);
+  font-size: 0.9rem;
+}
+
+.dashboard-summary {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.dashboard-grid,
+.projects-grid,
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.project-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 2.5vw, 1.65rem);
+  overflow-wrap: anywhere;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.project-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.project-card:focus-within {
+  border-color: var(--brand-600);
+  box-shadow: 0 0 0 3px rgba(65, 97, 209, 0.18), var(--shadow-md);
+}
+
+.project-card__top,
+.project-card-header,
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-card h2,
+.project-card h3,
+.project-card__title {
+  min-width: 0;
+  margin: 0;
+  color: var(--ink-950);
+  font-size: 1.15rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.project-card__summary,
+.project-card .summary {
+  margin: 0;
+  color: var(--ink-600);
+  font-size: 0.96rem;
+}
+
+.project-card__details,
+.project-details,
+.project-card dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.project-card__details dt,
+.project-details dt,
+.project-card dt {
+  margin-bottom: 0.25rem;
+  color: var(--ink-400);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.project-card__details dd,
+.project-details dd,
+.project-card dd {
+  margin: 0;
+  color: var(--ink-800);
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.project-card__activity,
+.recent-activity,
+.project-card .activity {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  margin: auto 0 0;
+  color: var(--ink-600);
+  font-size: 0.88rem;
+}
+
+.project-card__activity::before,
+.recent-activity::before,
+.project-card .activity::before {
+  flex: 0 0 auto;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-top: 0.45rem;
+  content: "";
+  background: var(--brand-600);
+  border-radius: 50%;
+}
+
+.badge,
+.status-badge,
+.priority-badge,
+.status,
+.priority {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  color: var(--neutral-800);
+  background: var(--neutral-100);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.badge::before,
+.status-badge::before,
+.priority-badge::before,
+.status::before,
+.priority::before {
+  width: 0.42rem;
+  height: 0.42rem;
+  flex: 0 0 auto;
+  content: "";
+  background: currentColor;
+  border-radius: 50%;
+}
+
+.status-active,
+.status--active,
+.status[data-status="active"],
+[data-status="active"] {
+  color: var(--success-800);
+  background: var(--success-100);
+}
+
+.status-at-risk,
+.status--at-risk,
+.status[data-status="at-risk"],
+[data-status="at-risk"] {
+  color: var(--danger-800);
+  background: var(--danger-100);
+}
+
+.status-steady,
+.status--steady,
+.status[data-status="steady"],
+[data-status="steady"] {
+  color: var(--brand-700);
+  background: var(--brand-100);
+}
+
+.status-completed,
+.status--completed,
+.status[data-status="completed"],
+[data-status="completed"] {
+  color: var(--neutral-800);
+  background: var(--neutral-100);
+}
+
+.priority-high,
+.priority--high,
+.priority[data-priority="high"],
+[data-priority="high"] {
+  color: var(--danger-800);
+  background: var(--danger-100);
+}
+
+.priority-medium,
+.priority--medium,
+.priority[data-priority="medium"],
+[data-priority="medium"] {
+  color: var(--warning-800);
+  background: var(--warning-100);
+}
+
+.priority-low,
+.priority--low,
+.priority[data-priority="low"],
+[data-priority="low"] {
+  color: var(--success-800);
+  background: var(--success-100);
+}
+
+.empty-state,
+.loading-state,
+.error-state {
+  padding: 2.5rem 1.5rem;
+  color: var(--ink-600);
+  text-align: center;
+  background: var(--surface);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+}
+
+.error-state {
+  color: var(--danger-800);
+  background: #fff8f8;
+  border-color: #f2b5bb;
+}
+
+@media (max-width: 58rem) {
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .dashboard-summary {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .dashboard-grid,
+  .projects-grid,
+  .project-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 38rem) {
+  .dashboard {
+    width: min(100% - 1.25rem, var(--content-width));
+    padding-top: 1.5rem;
+  }
+
+  .dashboard-grid,
+  .projects-grid,
+  .project-list {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    padding: 1.15rem;
+  }
+
+  .project-card__details,
+  .project-details,
+  .project-card dl {
+    gap: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .project-card,
+  .empty-state,
+  .loading-state,
+  .error-state {
+    border-width: 2px;
+  }
+
+  .badge,
+  .status-badge,
+  .priority-badge,
+  .status,
+  .priority {
+    border-color: currentColor;
+  }
+}

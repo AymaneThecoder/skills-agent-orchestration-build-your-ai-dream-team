@@ -1,0 +1,36 @@
+{
+  "projects": [
+    {
+      "name": "Contributor Onboarding",
+      "owner": "Mona Chen",
+      "status": "In progress",
+      "recentActivity": "Welcome flow copy reviewed today",
+      "priority": "High",
+      "summary": "Make a new contributor's first pull request easier to complete."
+    },
+    {
+      "name": "Search Refresh",
+      "owner": "Luis Romero",
+      "status": "At risk",
+      "recentActivity": "Indexing benchmark is blocked on test data",
+      "priority": "Critical",
+      "summary": "Improve discovery of documentation and open work across the workspace."
+    },
+    {
+      "name": "Design System",
+      "owner": "Aisha Patel",
+      "status": "Steady",
+      "recentActivity": "Button and form patterns shipped this week",
+      "priority": "Medium",
+      "summary": "Give product teams a shared set of accessible interface building blocks."
+    },
+    {
+      "name": "Release Notes",
+      "owner": "Jon Bell",
+      "status": "Complete",
+      "recentActivity": "Version 2.4 notes published on Friday",
+      "priority": "Low",
+      "summary": "Keep contributors informed about the latest improvements and fixes."
+    }
+  ]
+}

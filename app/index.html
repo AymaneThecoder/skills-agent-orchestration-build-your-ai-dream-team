@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project Pulse</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="dashboard" aria-labelledby="page-title">
+      <header class="dashboard-header">
+        <p class="eyebrow">Team overview</p>
+        <h1 id="page-title">Project Pulse</h1>
+        <p>See what is moving, who owns it, and where contributors can help next.</p>
+      </header>
+
+      <section aria-labelledby="projects-heading">
+        <div class="section-heading">
+          <h2 id="projects-heading">Projects</h2>
+          <p id="project-count" aria-live="polite"></p>
+        </div>
+        <div id="project-state" role="status" aria-live="polite">
+          <p>Loading project updates&hellip;</p>
+        </div>
+        <div id="project-list" class="project-grid" aria-label="Project cards"></div>
+      </section>
+    </main>
+
+    <noscript>
+      <p>Project Pulse needs JavaScript enabled to load the project updates.</p>
+    </noscript>
+
+    <script>
+      const projectList = document.querySelector("#project-list");
+      const projectState = document.querySelector("#project-state");
+      const projectCount = document.querySelector("#project-count");
+
+      function setState(message, stateClass) {
+        projectState.className = stateClass || "";
+        projectState.innerHTML = "";
+        const paragraph = document.createElement("p");
+        paragraph.textContent = message;
+        projectState.append(paragraph);
+      }
+
+      function addDetail(list, label, value) {
+        const item = document.createElement("div");
+        const heading = document.createElement("dt");
+        heading.textContent = label;
+        const detail = document.createElement("dd");
+        detail.textContent = value;
+        item.append(heading, detail);
+        list.append(item);
+      }
+
+      function renderProjects(projects) {
+        projectList.innerHTML = "";
+        projectCount.textContent = `${projects.length} ${projects.length === 1 ? "project" : "projects"}`;
+
+        projects.forEach((project) => {
+          const card = document.createElement("article");
+          card.className = "project-card";
+
+          const heading = document.createElement("h3");
+          heading.textContent = project.name;
+
+          const summary = document.createElement("p");
+          summary.className = "project-summary";
+          summary.textContent = project.summary || "No summary is available for this project.";
+
+          const details = document.createElement("dl");
+          addDetail(details, "Owner", project.owner);
+          addDetail(details, "Status", project.status);
+          addDetail(details, "Recent activity", project.recentActivity);
+          addDetail(details, "Priority", project.priority);
+
+          card.append(heading, summary, details);
+          projectList.append(card);
+        });
+      }
+
+      fetch("project-data.json")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Project data could not be loaded (HTTP ${response.status}).`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (!data || !Array.isArray(data.projects)) {
+            throw new Error("Project data is not in the expected format.");
+          }
+          if (data.projects.length === 0) {
+            setState("No projects are available yet.", "empty-state");
+            projectCount.textContent = "0 projects";
+            return;
+          }
+          renderProjects(data.projects);
+          projectState.hidden = true;
+        })
+        .catch((error) => {
+          projectList.innerHTML = "";
+          projectCount.textContent = "";
+          setState(`Unable to load project updates. ${error.message}`, "error-state");
+        });
+    </script>
+  </body>
+</html>
